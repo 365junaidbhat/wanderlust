@@ -62,7 +62,11 @@ body {
 
 /* Cards */
 
+<<<<<<< HEAD
 .listing-card {
+=======
+.card {
+>>>>>>> 1ae7dddb2a5893250224d193d0a0bdee8f6ad87b
   border: none !important;
   margin-bottom: 2rem;
 }
