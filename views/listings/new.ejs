@@ -4,7 +4,13 @@
   <div class="col-8 offset-2">
     <h3 class="mt-3">Create a New Listing</h3>
 
-    <form action="/listings" method="post" novalidate class="needs-validation">
+    <form
+      action="/listings"
+      method="post"
+      novalidate
+      class="needs-validation"
+      enctype="multipart/form-data"
+    >
       <div class="mb-3">
         <label for="title" form="form-label">Title</label>
         <input
@@ -30,14 +36,9 @@
       </div>
 
       <div class="mb-3">
-        <label for="image" form="form-label">Image link</label>
-        <input
-          type="text"
-          name="listing[image]"
-          placeholder="Image LINK/URL"
-          class="form-control"
-        />
-        <div class="valid-feedback">Image url is not mendotary</div>
+        <label for="image" form="form-label">Upload Listing Image</label>
+        <input type="file" name="listing[image]" class="form-control" />
+        required
       </div>
 
       <div class="row">

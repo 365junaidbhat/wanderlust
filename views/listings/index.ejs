@@ -1,14 +1,101 @@
 <% layout("/layouts/boilerplate") %> <%= success %>
-<h3>All Listing</h3>
-<!-- <form action="/listings/new" method="get">
-    <button>Create New Listing</button>
-  </form> -->
-<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+
+<style>
+  #filter {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .filter {
+    text-align: center;
+    margin-right: 1rem;
+    margin-top: 1.5rem;
+    opacity: 0.7;
+  }
+  .filter:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+  .filter p {
+    font-size: 0.8em;
+  }
+  .tax-info {
+    display: none;
+  }
+  .tax-toggle {
+    border: 1px solid black;
+    border-radius: 1rem;
+    height: 3.5rem;
+    padding: 1rem;
+    margin-left: 7rem;
+    display: flex;
+    align-items: center;
+  }
+</style>
+
+<div id="filter">
+  <div class="filter">
+    <div><i class="fa-solid fa-fire"></i></div>
+    <p>Trending</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-bed"></i></div>
+    <p>Room</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-fire"></i></div>
+    <p>Farms</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-mountain"></i></div>
+    <p>Amazing views</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-crown"></i></div>
+    <p>Top of the world</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-gem"></i></div>
+    <p>Luxe</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-cave"></i></div>
+    <p>Caves</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-home"></i></div>
+    <p>Tiny homes</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-water"></i></div>
+    <p>Lakefront</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-swimming-pool"></i></div>
+    <p>Amazing pools</p>
+  </div>
+
+  <div class="tax-toggle">
+    <div class="form-check-reverse form-switch">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="flexSwitchCheckDefault"
+      />
+      <label class="form-check-label" for="flexSwitchCheckDefault"
+        >Display total after taxes</label
+      >
+    </div>
+  </div>
+</div>
+
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-2">
   <% for (let listing of allListing) {%>
   <a href="listings/<%= listing._id%>" class="listing-link">
     <div class="card col listing-card">
       <img
-        src="<%= listing.image %>"
+        src="<%= listing.image.url %>"
         class="card-img-top"
         alt="listing_image"
         style="height: 20rem"
@@ -21,9 +108,23 @@
           <% if (listing && listing.price) { %> &#8377; <%=
           listing.price.toLocaleString("en-IN") %>/Night <% } else { %> Price
           information not available <% } %>
+          <i class="tax-info">&nbsp; + 18 GST</i>
         </p>
       </div>
     </div>
   </a>
   <% } %>
 </div>
+<script>
+  const taxSwitch = document.getElementById("flexSwitchCheckDefault");
+  taxSwitch.addEventListener("click", () => {
+    let taxInfo = document.getElementsByClassName("tax-info");
+    for (info of taxInfo) {
+      if (info.style.display != "inline") {
+        info.style.display = "inline";
+      } else {
+        info.style.display = "none";
+      }
+    }
+  });
+</script>
